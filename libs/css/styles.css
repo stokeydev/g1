@@ -1,0 +1,77 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+   
+  
+  #selectContainer {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 11px 0;
+  }
+  
+  #countrySelect {
+    width: 200px;
+    margin: 0 auto;
+  } 
+
+
+
+  .currency-modal {
+    background-color: white;
+}
+
+
+
+
+
+
+
+  
+ 
+  /* Increase modal width and height for Box Four */
+#modal4 .modal-dialog {
+  max-width: 800px; /* Adjust this value as needed */
+}
+
+/* Increase modal body content height for Box Four */
+#modal4 .modal-body {
+  max-height: 600px; /* Adjust this value as needed */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+.myBtn {
+  width: 70px;
+}
+
+
+/* Capitalize only the first letter and set font size for layer control labels */
+.leaflet-control-layers label {
+  text-transform: capitalize;
+  font-size: 14px; 
+}
+
+
+
+.custom-news-title {
+  background-color: #ff5722; 
+  color: white; 
+  padding: 10px; 
+  font-weight: bold; 
+  width: 100%; 
+}
+
+
+
+  
+  
