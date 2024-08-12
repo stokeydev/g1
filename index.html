@@ -3,13 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Gazetteer</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.8.0/leaflet.css"> -->
 
     <link rel="stylesheet" href="libs/css/leaflet_1.8.0.css">
-
-    <link rel="stylesheet" href="libs/css/toastify.min.css" >
+    <link rel="stylesheet" href="libs/css/toastify.min.css">
     <link rel="stylesheet" href="libs/css/MarkerCluster.Default.min.css">
     <link rel="stylesheet" href="libs/css/leaflet.markercluster.css">
     <link rel="stylesheet" href="libs/css/leaflet.extra-markers.min.css">
@@ -33,259 +30,9 @@
 
     <div id="map"></div>
 
-    <!-- COUNTRY INFO modals -->
-    <div id="modal1" class="modal" data-bs-backdrop="false" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content shadow">
-          <div class="modal-header bg-success bg-gradient text-white">
-            <h5 class="modal-title"> Country Info</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <table class="table table-striped">
-              <tr>
-                <td class="text-center">
-                  <!-- Icon or other content here -->
-                  <i class="fa-solid fa-globe"></i>
-                </td>
-                <td>
-                  Continent
-                </td>
-                <td id="txtContinent" class="text-end">
-                  <!-- Content for continent -->
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <!-- Icon or other content here -->
-                  <i class="fa-solid fa-city"></i>
-                </td>
-                <td>
-                  Capital
-                </td>
-                <td id="txtCapital" class="text-end">
-                  <!-- Content for capital -->
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <!-- Icon or other content here -->
-                  <i class="fa-solid fa-language"></i>
-                </td>
-                <td>
-                  Languages
-                </td>
-                <td id="txtLanguages" class="text-end">
-                  <!-- Content for languages -->
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <!-- Icon or other content here -->
-
-                  <i class="fa-solid fa-person"></i>
-                  
-                </td>
-                <td>
-                  Population
-                </td>
-                <td id="txtPopulation" class="text-end">
-                  <!-- Content for population -->
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center">
-                  <!-- Icon or other content here -->
-                  <i class="fa-solid fa-chart-area"></i>
-                </td>
-                <td>
-                  Area
-                </td>
-                <td id="txtArea" class="text-end">
-                  <!-- Content for area -->
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CURRENCY modal -->
-    <div class="modal" id="modal2" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-          <div class="modal-content shadow border-primary currency-modal">
-              <div class="modal-header bg-secondary bg-gradient text-white">
-                  <h5 class="modal-title" id="modalCurrencyTitle">
-                      Currency: <span class="txtCountry" id="txtCountry"></span>
-                  </h5>
-                  <button type="button" class="btn-close btn-close-white" aria-label="Close" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body">
-                <div class="form-floating mb-3">
-                  <input id="txtSourceAmount" type="number" class="form-control" value="1" min="1" step="1">
-                  <label for="txtSourceAmount">From USD</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <select id="targetCurrencySelect" class="form-select">
-                      <!-- Options will be populated dynamically using JavaScript -->
-                  </select>
-                  <label for="targetCurrencySelect">Convert to</label>
-                </div>
-                <div class="form-floating">
-                  <input id="toAmount" type="text" class="form-control" disabled>
-                  <label for="toAmount">Result</label>
-                </div>
-
-                  <!-- <p>
-                      Exchange Rate: <span id="txtExchange"></span>
-                  </p> -->
-                  <!-- Add other elements as needed -->
-              </div>
-              <div class="modal-footer">
-                  <!-- <button type="button" class="btn btn-primary double" id="resetConverter">Reset</button> -->
-                  <button type="button" class="btn btn-outline-secondary btn-sm myBtn" data-bs-dismiss="modal">CLOSE</button>
-              </div>
-          </div>
-      </div>
-    </div>
-
-    <!-- WEATHER modal -->
-    <div id="modal3" class="modal" data-bs-backdrop="false" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content shadow">
-          <div class="modal-header bg-primary bg-gradient text-white">
-            <h5 class="modal-title">Weather Information</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">          
-            <div id="pre-load"></div>
-            <div class="row">
-              <div class="col border m-2">
-                <p class="fw-bold fs-5 mt-1">TODAY</p>
-                <div class="row">
-                  <div class="col text-center m-3">
-                    <p id="todayConditions" class="fw-bold fs-6"></p>
-                  </div>
-                  <div class="col text-center">
-                    <img id="todayIcon" class="img-fluid mt-0" src="" alt="" title="">
-                  </div>
-                  <div class="col text-center">
-                    <p class="fw-bold fs-4 mb-0"><span id="todayMaxTemp"></span></p>
-                    <p class="fs-5 mt-0 text-secondary"><span id="todayMinTemp"></span></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col border m-2">
-                <p id="day1Date" class="fw-bold text-center fs-6 my-3"></p>
-                <div class="row">
-                  <div class="col text-center">
-                    <p class="fw-bold fs-4 mb-0"><span id="day1MaxTemp"></span></p>
-                    <p class="fs-5 mt-0 text-secondary"><span id="day1MinTemp"></span></p>
-                  </div>
-                  <div class="col text-center">
-                    <img id="day1Icon" src="" alt="" title="">
-                  </div>
-                </div>
-              </div>
-              <div class="col border m-2 text-center">
-                <p id="day2Date" class="fw-bold fs-6 text-center my-3"></p>
-                <div class="row">
-                  <div class="col text-center">
-                    <p class="fw-bold fs-4 mb-0"><span id="day2MaxTemp"></span></p>
-                    <p class="fs-5 mt-0 text-secondary"><span id="day2MinTemp"></span></p>
-                  </div>
-                  <div class="col text-center">
-                    <img id="day2Icon" src="" alt="" title="">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
    
 
-    <!-- WIKIPEDIA modal -->
-    <div id="modal5" class="modal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content custom">
-          <div class="modal-header custom-header">
-            <h3 class="lead" id="wikipediaTitle">Wikipedia Details</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="row">
-                <div class="col-12">
-                  <div class="card mb-3">
-                    <div class="card-body">
-                      <h5 class="card-title fw-bold">Summary</h5>
-                      <p class="card-text"><span id="txtSummary"></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="row">
-                <div class="col-12">
-                  <div class="card mb-3">
-                    <div class="card-body">
-                      <h5 class="card-title fw-bold">Title</h5>
-                      <p class="card-text"><span id="txtTitle"></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title fw-bold">Wiki URL</h5>
-                      <p class="card-text"><span id="txtWU"></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <!-- NEWS modal -->
-<div id="newsModal" class="modal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content custom">
-      <div class="modal-header custom-header">
-        <h3 class="lead custom-news-title" id="newsTitle">Breaking News</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container" id="theNEWS">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+    <!-- Include JavaScript libraries -->
     <script src="libs/js/leaflet.js"></script>
     <script src="libs/js/jquery.min.js"></script>
     <script src="libs/js/toastify.min.js"></script>
@@ -293,6 +40,34 @@
     <script src="libs/js/leaflet.extra-markers.js"></script>
     <script src="libs/js/bootstrap.min.js"></script>
     <script src="libs/js/easy-button.min.js"></script>
+
+    <!-- Main Script -->
     <script src="libs/js/script.js"></script>
+
+    <!-- Additional inline JavaScript for fetching country names and codes -->
+    <script>
+      // Get country codes and names from getCountry.php and add to dropdown selector
+      function getCountryNamesAndCodes() {
+        $.ajax({
+          url: "assets/php/getCountry.php",
+          type: "GET",
+          success: function (countries) {
+            let options = "";
+            for (let country of countries) {
+              options += '<option value="' + country[1] + '">' + country[0] + "</option>";
+            }
+            $("#countrySelect").append(options);
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error fetching country data: ", textStatus, errorThrown);
+          }
+        });
+      }
+
+      // Call the function to populate the dropdown when the document is ready
+      $(document).ready(function() {
+        getCountryNamesAndCodes();
+      });
+    </script>
   </body>
 </html>
